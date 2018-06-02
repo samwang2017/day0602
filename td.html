@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--<table>-->
+    <!--<tbody>-->
+    <!--&lt;!&ndash;<tr><td>1</td></tr>&ndash;&gt;-->
+    <!--&lt;!&ndash;<tr><td>2</td></tr>&ndash;&gt;-->
+    <!--&lt;!&ndash;<tr><td>3</td></tr>&ndash;&gt;-->
+    <!--<tr is="row"></tr>-->
+    <!--<tr is="row"></tr>-->
+    <!--<tr is="row"></tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
+    <!--<ol>-->
+    <!--<li is="row"></li>-->
+    <!--<li is="row"></li>-->
+    <!--<li is="row"></li>-->
+    <!--<row></row>-->
+    <!--</ol>-->
+    <!--<select name="" id="">-->
+    <!--<option value="" is="row"></option>-->
+    <!--<option value="" is="row"></option>-->
+    <!--<option value="" is="row"></option>-->
+    <!--<row></row>-->
+    <!--</select>-->
+    <!--<div @click="clickFun" ref="click"></div>-->
+    <!--<div @click="clickFun" ref="click"></div>-->
+    <row @addclick="faclick" ref="click1"></row>
+    <row @addclick="faclick" ref="click2"></row>
+    <div ref="sums">{{total}}</div>
+
+</div>
+<script>
+    Vue.component('row', {
+        // template:'<tr><td>a row</td></tr>'
+        // data: function () {
+        //     return {
+        //         // content:'this a what1',
+        //         // content:'this a what2',
+        //         // content:'this a what3'
+        //         num: 0
+        //     }
+        // },
+        template: '<option   @click="clickFun">{{num}}</option>',
+        methods: {
+            clickFun: function () {
+                // console.log(3)
+                this.num++
+                // var value = this.$refs.click.innerHTML
+                // console.log( value)
+                // this.$refs.sums.innerHTML=this.$refs.one.value+this.$refs.two.value
+                // this.total = 99
+                this.$emit('addclick')
+            }
+        },
+        data:
+            function () {
+                return {
+                    num:0
+                }
+            }
+
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            total:0
+        },
+        methods: {
+            faclick:function (e) {
+                // console.log(666)
+                // console.log(e)
+                var value1=this.$refs.click1.num
+                var value2=this.$refs.click2.num
+                console.log(value1)
+                console.log(value2)
+                // console.log(this.$refs.click2.num)
+                this.total=value1+value2
+
+            }
+        },
+        computed: {}
+    })
+</script>
+</body>
+</html>

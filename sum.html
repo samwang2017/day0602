@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    this is  a new calculator<br>
+    <num @sontofa="faFun" ref="num1"></num>
+    <num @sontofa="faFun" ref="num2"></num>
+    <div >{{total}}</div>
+
+</div>
+<script>
+    Vue.component('num',{
+        template:'<div @click="num1click"> {{numofson}}</div>',
+        data:function(){
+            return {
+                numofson:0
+            }
+        },
+        methods: {
+            num1click:function(){
+                this.numofson++
+                // console.log(this.num1)
+                this.$emit('sontofa',this.num1)
+            }
+        }
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            total:0
+        },
+        methods: {
+
+            faFun:function (e) {
+                console.log(this.$refs.num1.numofson)
+                // console.log(e)
+                // this.total=this.$refs.num1.num+this.$refs.num2.num
+                this.total=this.$refs.num1.numofson+this.$refs.num2.numofson
+            }
+        },
+        computed: {}
+    })
+</script>
+</body>
+</html>

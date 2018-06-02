@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <son :count="10" @www="faClick" ref="son1"></son>
+    <son :count="23" ref="son2" @www="faClick" ></son>
+    <div ref="total">{{total}}</div>
+
+</div>
+<script>
+    var son={
+        props:['count'],
+        data:function(){
+            return {
+                num:this.count
+            }
+        }
+
+        ,
+        template:'<div @click="sonClick">{{num}}</div>',
+        methods:{
+            sonClick:function(){
+                this.num++
+                this.$emit('www',this.num)
+            }
+        }
+    }
+    var vm = new Vue({
+        el: '#app',
+        components:{
+            son:son
+        },
+        data: {
+            total:33
+        },
+        methods: {
+            faClick:function(e){
+                // e=e+1
+                this.total++
+                    // console.log(e)
+
+            }
+        },
+        computed: {}
+    })
+</script>
+</body>
+</html>
